@@ -1,0 +1,43 @@
+@use '~@angular/material'as mat;
+
+@use './palettes.scss'as app-palettes;
+@use './colours.scss'as app-colours;
+
+@import '~@angular/material/theming';
+
+
+
+/* App Typography */
+$app-typography: mat-typography-config($font-family: 'Source Sans Pro, sans-serif',
+    $display-4: mat-typography-level(56px, 56px, 300),
+    $display-3: mat-typography-level(40px, 40px, 400),
+    $display-2: mat-typography-level(30px, 30px, 400),
+    $display-1: mat-typography-level(24px, 24px, 400),
+    $headline: mat-typography-level(20px, 24px, 400),
+    $title: mat-typography-level(18px, 22px, 500),
+    $subheading-2: mat-typography-level(14px, 18px, 400),
+    $subheading-1: mat-typography-level(14px, 18px, 400),
+    $body-2: mat-typography-level(12px, 16px, 500),
+    $body-1: mat-typography-level(12px, 16px, 400),
+    $caption: mat-typography-level(12px, 16px, 400),
+    $input: mat-typography-level(inherit, 1.125, 400));
+
+/* Override typography for all Angular Material, including mat-base-typography and all components. */
+@include angular-material-typography($app-typography);
+
+@include mat-core($app-typography);
+
+
+
+$app-primary: mat-palette(app-palettes.$brand-green);
+$app-accent: mat-palette(app-palettes.$brand-blue);
+$app-warn: mat-palette(mat.$red-palette);
+
+
+
+$app-default-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+$app-dark-theme: mat-dark-theme((color: (primary: $app-primary, accent: $app-accent, warn: $app-warn)));
+
+
+
+@include angular-material-theme($app-default-theme);

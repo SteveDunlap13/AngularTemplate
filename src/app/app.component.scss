@@ -1,0 +1,81 @@
+html,
+body {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+
+    /* font styling outside material framework */
+    font-family: 'Source Sans Pro', 'sans-serif';
+
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+.main-app-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.header,
+.footer {
+    display: flex;
+    flex-basis: 30px;
+    justify-content: center;
+}
+
+.footer-content {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.main-app-wrapper-fx .main {
+    overflow-y: auto;
+}
+
+.tabGroup {
+
+    .mat-tab-links {
+        display: flex;
+    }
+
+    .mat-tab-link {
+        letter-spacing: 1.25px;
+        opacity: 0.84;
+    }
+
+    .mat-tab-label-active {
+        font-weight: 600;
+    }
+}
+
+.app-toolbar {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .app-toolbar {
+        .mat-icon-button .mat-icon {
+            opacity: 0.8;
+        }
+    }
+
+    .mat-tab-nav-bar {
+        flex: 1;
+        margin-left: 5em;
+    }
+}

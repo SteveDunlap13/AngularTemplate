@@ -1,0 +1,17 @@
+<div class="main-app-wrapper main-app-wrapper-fx">
+
+  <app-header class="header"></app-header>
+
+  <main class="main">
+
+    <router-outlet></router-outlet>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-content">
+      Version: {{appVersion}} &copy; {{ year | date:'yyyy' }} - All rights reserved.
+    </p>
+  </footer>
+
+</div>

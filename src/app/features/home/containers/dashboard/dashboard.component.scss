@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    margin: 0 1em;
+    margin: 1em;
+
+    .dashboard-wrapper {
+
+        padding: 1em;
+        border-radius: 4px;
+    }
+}

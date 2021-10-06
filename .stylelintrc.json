@@ -1,0 +1,30 @@
+{
+    "extends": [
+        "stylelint-config-sass-guidelines",
+        "stylelint-config-recess-order"
+    ],
+    "rules": {
+        "indentation": null,
+        "function-parentheses-space-inside": "never-single-line",
+        "selector-max-compound-selectors": 6,
+        "order/properties-alphabetical-order": null,
+        "no-missing-end-of-source-newline": null,
+        "selector-pseudo-element-no-unknown": null,
+        "selector-no-qualifying-type": null,
+        "selector-class-pattern": null,
+        "selector-max-id": null,
+        "rule-empty-line-before": null,
+        "max-nesting-depth": [
+            5,
+            {
+                "ignoreAtRules": [
+                    "each",
+                    "media",
+                    "supports",
+                    "include",
+                    "pseudo-classes"
+                ]
+            }
+        ]
+    }
+}

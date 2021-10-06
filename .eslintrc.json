@@ -1,0 +1,166 @@
+{
+    "root": true,
+    "ignorePatterns": [],
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "parserOptions": {
+                "ecmaVersion": 2017,
+                "env": {
+                    "es6": true
+                },
+                "project": [
+                    "tsconfig.json"
+                ],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "plugin:@angular-eslint/recommended",
+                "plugin:@angular-eslint/recommended--extra",
+                "plugin:@angular-eslint/template/process-inline-templates",
+                "plugin:import/recommended",
+                "plugin:import/typescript"
+            ],
+            "rules": {
+                "@typescript-eslint/semi": "warn",
+                "semi": [
+                    1,
+                    "always"
+                ],
+                "curly": "warn",
+                "eqeqeq": "warn",
+                "no-throw-literal": "warn",
+                "object-curly-spacing": "off",
+                "linebreak-style": "off",
+                "keyword-spacing": 1,
+                "new-cap": 0,
+                "padded-blocks": 0,
+                "require-jsdoc": 0,
+                "prefer-object-spread": 1,
+                "prefer-spread": 1,
+                "no-array-constructor": 1,
+                "prefer-template": 1,
+                "prefer-destructuring": [
+                    1,
+                    {
+                        "array": false,
+                        "object": true
+                    }
+                ],
+                "no-console": 0,
+                "valid-jsdoc": 0,
+                "no-new-object": 1,
+                "object-shorthand": 1,
+                "no-param-reassign": 1,
+                "no-duplicate-imports": 1,
+                "prefer-arrow-callback": 1,
+                "implicit-arrow-linebreak": 1,
+                "import/no-unresolved": 0,
+                /* TEMPORARY FIXES START */
+                "@angular-eslint/no-empty-lifecycle-method": "off",
+                "@typescript-eslint/explicit-function-return-type": "off",
+                "@typescript-eslint/member-ordering": "off",
+                "@typescript-eslint/no-explicit-any": "off",
+                "@typescript-eslint/no-empty-function": "off",
+                "@typescript-eslint/no-unsafe-assignment": "off",
+                "@typescript-eslint/no-unsafe-call": "off",
+                "@typescript-eslint/no-unsafe-member-access": "off",
+                "@typescript-eslint/no-unsafe-return": "off",
+                "@typescript-eslint/no-shadow": "warn",
+                "@typescript-eslint/restrict-template-expressions": "warn",
+                "@typescript-eslint/restrict-plus-operands": "warn",
+                /* TEMPORARY FIXES END */
+                "max-len": [
+                    1,
+                    {
+                        "ignoreStrings": true,
+                        "ignoreUrls": true,
+                        "code": 300,
+                        "ignoreTemplateLiterals": true
+                    }
+                ],
+                "indent": [
+                    1,
+                    4,
+                    {
+                        "MemberExpression": 1,
+                        "SwitchCase": 1
+                    }
+                ],
+                "max-depth": [
+                    1,
+                    {
+                        "max": 6
+                    }
+                ],
+                "comma-dangle": 0,
+                "arrow-parens": 0,
+                "no-return-await": 1,
+                "default-case": 1,
+                "max-lines-per-function": [
+                    1,
+                    {
+                        "max": 300,
+                        "skipComments": true
+                    }
+                ],
+                "max-lines": [
+                    1,
+                    {
+                        "skipBlankLines": true,
+                        "skipComments": true,
+                        "max": 1000
+                    }
+                ],
+                "@typescript-eslint/explicit-member-accessibility": [
+                    1,
+                    {
+                        "ignoredMethodNames": [
+                            "ngOnChanges",
+                            "ngOnDestroy",
+                            "ngOnInit",
+                            "ngAfterViewInit"
+                        ],
+                        "overrides": {
+                            "accessors": "off",
+                            "constructors": "no-public",
+                            "methods": "explicit",
+                            "properties": "explicit",
+                            "parameterProperties": "explicit"
+                        }
+                    }
+                ],
+                "@typescript-eslint/explicit-module-boundary-types": "off",
+                // "@typescript-eslint/explicit-module-boundary-types": [
+                //   1,
+                //   {
+                //     "allowedNames": [
+                //       "ngOnInit",
+                //       "ngOnChanges",
+                //       "ngOnDestroy"
+                //     ]
+                //   }
+                // ],
+                // Enforce a maximum depth that callbacks can be nested
+                "max-nested-callbacks": [
+                    "warn",
+                    6
+                ]
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "plugin:@angular-eslint/template/recommended"
+            ],
+            "rules": {}
+        }
+    ]
+}

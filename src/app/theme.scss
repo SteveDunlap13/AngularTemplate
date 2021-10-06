@@ -1,0 +1,38 @@
+@use '../assets/styles/material.scss'as app-branding;
+@use '../assets/styles/colours.scss'as app-colours;
+
+
+
+@use './app.component.theme.scss'as app-theme;
+
+@use './shared/components/header/header.component.theme.scss'as app-header;
+@use './features/home/containers/dashboard/dashboard.component.theme.scss'as app-home;
+
+
+
+@import '~@angular/material/theming';
+
+@include app-theme.theme(app-branding.$app-default-theme, false);
+
+@include app-header.theme(app-branding.$app-default-theme, false);
+@include app-home.theme(app-branding.$app-default-theme, false);
+
+
+
+.dark-theme {
+    $app-dark-theme: map-merge(app-branding.$app-dark-theme,
+            (color: map-merge(map-get(app-branding.$app-dark-theme, color),
+                    (background: map-merge(app-branding.$mat-dark-theme-background,
+                            (background: app-colours.$dark-background,
+                            )),
+                    )),
+            ));
+
+    @include angular-material-color(app-branding.$app-dark-theme);
+
+    /* inlcude component theme files here */
+    @include app-theme.theme(app-branding.$app-dark-theme, true);
+
+    @include app-header.theme(app-branding.$app-dark-theme, true);
+    @include app-home.theme(app-branding.$app-dark-theme, true);
+}
