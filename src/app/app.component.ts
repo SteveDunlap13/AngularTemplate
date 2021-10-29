@@ -1,14 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
 
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { Store } from '@ngrx/store';
-
-import { RootStoreState } from './root-store';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map, Observable } from 'rxjs';
 
 import { AppConfigService } from './shared/services/app.config.service';
-
-
 
 
 
@@ -20,19 +16,18 @@ import { AppConfigService } from './shared/services/app.config.service';
 export class AppComponent implements OnInit {
 
     public year = new Date();
-    public appVersion = '';
+    public appVersion$?: Observable<string>;
 
 
 
-    constructor(
-        private store: Store<RootStoreState.State>,
-        private appConfigService: AppConfigService) { }
+    constructor(private appConfigService: AppConfigService) { }
 
 
 
-    async ngOnInit(): Promise<void> {
+    ngOnInit(): void {
 
-        await this.appConfigService.init();
-        this.appVersion = `${this.appConfigService.getSettings('version').number as string}${this.appConfigService.getSettings('version').build as string}`;
+        this.appConfigService.init().pipe(untilDestroyed(this)).subscribe();
+
+        this.appVersion$ = this.appConfigService.getSettings$('version').pipe(map(version => `${version.number}${version.build}`));
     }
 }
