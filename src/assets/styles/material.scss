@@ -1,9 +1,9 @@
-@use '~@angular/material'as mat;
+@use '@angular/material'as mat;
 
 @use './palettes.scss'as app-palettes;
 @use './colours.scss'as app-colours;
 
-@import '~@angular/material/theming';
+@import '@angular/material/theming';
 
 
 

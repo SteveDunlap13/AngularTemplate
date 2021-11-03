@@ -3,7 +3,7 @@ Various code snippets, configurations.
 
 
 # NPM Packages
-npm i --force @angular/animations @angular/common @angular/compiler @angular/core @angular/forms @angular/material @angular/material-moment-adapter @angular/platform-browser @angular/platform-browser-dynamic @angular/router @ngneat/until-destroy @ngrx/core @ngrx/effects @ngrx/router-store @ngrx/store @ngrx/store-devtools moment rxjs tslib zone.js 
+npm i --force @angular/animations @angular/cdk @angular/common @angular/compiler @angular/core @angular/forms @angular/material @angular/material-moment-adapter @angular/platform-browser @angular/platform-browser-dynamic @angular/router @ngneat/until-destroy @ngrx/core @ngrx/effects @ngrx/router-store @ngrx/store @ngrx/store-devtools moment rxjs tslib zone.js 
 
 
 
