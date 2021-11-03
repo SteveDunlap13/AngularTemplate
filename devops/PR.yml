@@ -1,0 +1,16 @@
+trigger: none
+
+variables:
+  appName: 'angular-template'
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- job: webapp_build
+  displayName: 'build ${{ variables.appName }}'
+  steps:
+  - template: ./templates/build_webapp_template.yml
+    parameters:
+      appName: ${{ variables.appName }}
+      dist: dist/Template

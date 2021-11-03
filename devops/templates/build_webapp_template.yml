@@ -1,0 +1,38 @@
+parameters:
+  appName:
+  dist:
+
+steps:
+  - task: NodeTool@0
+    inputs:
+        versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - task: Npm@1
+    displayName: 'npm install npm@7'
+    inputs:
+      command: 'custom'
+      customCommand: 'install --global npm@7'
+
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      command: 'ci'
+
+  - task: Npm@1
+    displayName: 'npm run build'
+    inputs:
+      command: 'custom'
+      customCommand: 'run build'
+
+  - task: Npm@1
+    displayName: 'npm run lint'
+    inputs:
+      command: 'custom'
+      customCommand: 'run lint'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'publish artifact for ${{ parameters.appName }}'
+    inputs:
+      pathtoPublish: '${{ parameters.dist }}'
+      ArtifactName: '${{ parameters.appName }}'

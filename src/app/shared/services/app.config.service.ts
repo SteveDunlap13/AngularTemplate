@@ -1,8 +1,10 @@
-/* eslint-disable no-param-reassign */
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
-import { map } from 'rxjs';
+
+import { BehaviorSubject, first, map, Observable, tap } from 'rxjs';
+
+import { AppConfig, AppConfigPropertyPath, AppConfigPropertyType } from '../interfaces';
 
 
 
@@ -12,13 +14,13 @@ export class AppConfigService {
     /*
         app.config.json by default in source contains settings for local development
         This application will ALWAYS load contents from this file
-        
+
         During release pipelines, file transforms are performed to copy the contents of the
         respective app.config.XXX.json files (dev, qa, prod, etc) into this one
-        
+
         Anywhere in the application, where app settings are required, bind the instance of
         this service in its constructor
-        
+
         e.g. constructor(private appConfigService: AppConfigService) { }
         ...
         const clientId = this.appConfigService.settings.clientId
@@ -27,7 +29,7 @@ export class AppConfigService {
 
     private readonly configUrl = `./configuration/app.config.json`;
 
-    private configSettings: any = null;
+    private configSettings$ = new BehaviorSubject<AppConfig | null>(null);
     private http: HttpClient;
 
 
@@ -40,40 +42,34 @@ export class AppConfigService {
             to inject its own interceptor before its initialization is complete
         */
 
-        this.http = new HttpClient(httpBackend);
+        this.http = new HttpClient(this.httpBackend);
     }
 
-
-
-    public init(): Promise<boolean> {
-
-        return new Promise<boolean>((resolve, reject) => {
-
-            this.http.get(this.configUrl)
-                .pipe(map(result => result))
-                .subscribe({
-
-                    next: (value) => {
-                        this.configSettings = value;
-                        resolve(true);
-                    },
-
-                    error: (error) => reject(error)
-                });
-        });
+    public init(): Observable<unknown> {
+        return this.http.get<AppConfig>(this.configUrl).pipe(tap(result => this.configSettings$.next(result)));
     }
 
-    public getSettings(key?: string | Array<string>): any {
+    /** Returns an observable with a configuration setting. Waits until configuration is loaded. */
+    public getSettings$<T extends AppConfigPropertyPath>(key: T): Observable<AppConfigPropertyType<T>> {
+        return this.configSettings$.pipe(
+            first((appConfig): appConfig is AppConfig => !!appConfig),
+            map(appConfig => this.getSettingsFromConfig(appConfig, key))
+        );
+    }
 
-        if (!key || (Array.isArray(key) && !key[0])) {
-            return this.configSettings;
+    /** Returns a configuration setting. Throws error if settings were not loaded yet. */
+    public getSettings<T extends AppConfigPropertyPath>(key: T): AppConfigPropertyType<T> {
+        if (!this.configSettings$.value) {
+            throw new Error('App config was not loaded yet.');
         }
 
-        if (!Array.isArray(key)) {
-            key = key.split('.');
-        }
+        return this.getSettingsFromConfig(this.configSettings$.value, key);
+    }
 
-        const result = key.reduce((account: any, current: string) => account && account[current], this.configSettings);
+    private getSettingsFromConfig<T extends AppConfigPropertyPath>(appConfig: AppConfig, key: T): AppConfigPropertyType<T> {
+        const keys = key.split('.');
+
+        const result = keys.reduce((account: any, current) => account && account[current], appConfig);
 
         return result;
     }
